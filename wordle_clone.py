@@ -87,4 +87,4 @@ def main():
             break
 
         # Remove else:
-    game_over(guesses, word,guessed_correctly=guesses[idx] == word)
+    game_over(guesses, WORD,guessed_correctly=guesses[idx] == word)
