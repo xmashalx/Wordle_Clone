@@ -55,6 +55,13 @@ def show_guess(guess, word):
     print("Misplaced letters:", ", ".join(sorted(misplaced_letters)))
     print("Wrong letters:", ", ".join(sorted(wrong_letters)))
 
+def game_over(guesses, word,guessed_correctly):
+    refresh_page(headline="Game Over")
+    show_guesses(guesses, word)
+    if guessed_correctly:
+        console.print(f"\n[bold white on green]Correct, the word is {word}[/]")
+    else:
+        console.print(f"\n[bold white on red]Sorry, the word was {word}[/]")
 
 def main():
     print("Welcome to Wyrdle!")
@@ -79,7 +86,5 @@ def main():
         if guesses[idx] == WORD:
             break
 
-
-    else:
-        print("You have used all your attempts.")
-        print(f"The word was {WORD}")
+        # Remove else:
+    game_over(guesses, word,guessed_correctly=guesses[idx] == word)
