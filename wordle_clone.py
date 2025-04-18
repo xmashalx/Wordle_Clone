@@ -50,7 +50,7 @@ def main():
     print("Good luck!")
 
     words_path = pathlib.Path(__file__).parent / "wordlist.txt"
-    word = get_random_word(words_path.read_text(encoding="utf-8").split("\n"))
+    WORD = get_random_word(words_path.read_text(encoding="utf-8").split("\n"))
 
 
     for i in range(1,7):
@@ -64,4 +64,3 @@ def main():
     else:
         print("You have used all your attempts.")
         print(f"The word was {WORD}")
-main()
