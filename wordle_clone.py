@@ -5,7 +5,7 @@ from string import ascii_letters
 from rich.console import Console
 from rich.theme import Theme
 
-console = Console(width=40)
+console = Console()
 
 def refresh_page(headline):
     console.clear()
