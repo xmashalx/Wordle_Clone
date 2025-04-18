@@ -27,6 +27,23 @@ def get_user_guess():
     blockRegexes=[r'.*'])  # Block everything not explicitly allowed
     return guess.upper()
 
+def show_guesses(guesses, word):
+    for guess in guesses:
+        styled_guess = []
+        for letter, correct in zip(guess, word):
+            if letter == correct:
+                style = "bold white on green"
+            elif letter in word:
+                style = "bold white on yellow"
+            elif letter in ascii_letters:
+                style = "white on #666666"
+            else:
+                style = "dim"
+            styled_guess.append(f"[{style}]{letter}[/]")
+
+        console.print("".join(styled_guess), justify="center")
+
+
 def show_guess(guess, word):
     correct_letters = {
         letter for letter, correct in zip(guess, word) if letter == correct
@@ -51,15 +68,17 @@ def main():
 
     words_path = pathlib.Path(__file__).parent / "wordlist.txt"
     WORD = get_random_word(words_path.read_text(encoding="utf-8").split("\n"))
+    guesses = ["_" * 5] * 6
 
-
-    for i in range(1,7):
-        print(f'Attempt {i} of 6')
-        guess=get_user_guess()
-        if guess==WORD:
-            print("Correct")
+    for idx in range(6):
+        refresh_page(headline=f"Guess {idx + 1}")
+        show_guesses(guesses, WORD)
+        
+        guesses[idx] = get_user_guess()
+        
+        if guesses[idx] == WORD:
             break
-        show_guess(guess, WORD)
+
 
     else:
         print("You have used all your attempts.")
